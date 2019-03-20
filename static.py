@@ -69,25 +69,22 @@ def main():
     target_x = 0
     target_y = 0
 
-    coords = [[0,0],
-              [1.5,1.5],
-              [3.5,10.5]
-              ]
+    coords = create_waypoints()
     i = 0
+
     rate = rospy.Rate(30)
     while not rospy.is_shutdown():
-        for i in range(len(coords)):
-            rate.sleep()
+        rate.sleep()
         # -------------------------------
         # ------Replace this example-----
         # ---------with your code!-------
         # -------------------------------
         # Find how far we are away from target
-        #distance_to_target = ((target_x - drone.position.x)**2 +
-        #                     (target_y - drone.position.y)**2)**0.5
+        distance_to_target = ((target_x - drone.position.x)**2 +
+                             (target_y - drone.position.y)**2)**0.5
 
         # Do special action if we are close
-        # if distance_to_target < 0.5:
+        if distance_to_target < 0.5:
         #     # Print current distance to goal. Note that we
         #     # wont reach the goal, since we just move randomly
         #     distance_to_goal = ((drone.position.x - goal.x)**2 +
@@ -99,13 +96,25 @@ def main():
         #     target_x = random.randint(-3, 3)
         #     target_y = random.randint(-3, 3)
 
+            if i < len(coords):
+                i = i + 1
+
             target_x = coords[i][1]
             target_y = coords[i][0]
 
             # Move to random point
             drone.set_target(target_x, target_y)
-        #else:
-        #    print("distance to target:", distance_to_target)
+
+        else:
+            print("distance to target:", distance_to_target)
+
+
+def create_waypoints():
+    coords = [[0, 0],
+              [1.5, 1.5],
+              [3.5, 10.5]
+              ]
+    return coords
 
 
 if __name__ == '__main__':
