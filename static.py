@@ -85,16 +85,6 @@ def main():
 
         # Do special action if we are close
         if distance_to_target < 0.5:
-        #     # Print current distance to goal. Note that we
-        #     # wont reach the goal, since we just move randomly
-        #     distance_to_goal = ((drone.position.x - goal.x)**2 +
-        #                         (drone.position.y - goal.y)**2)**0.5
-        #
-        #     print("Distance to goal is now", distance_to_goal)
-        #
-        #     # Generate some random point and rotation
-        #     target_x = random.randint(-3, 3)
-        #     target_y = random.randint(-3, 3)
 
             if i < len(coords):
                 i = i + 1
@@ -112,7 +102,9 @@ def main():
 def create_waypoints():
     coords = [[0, 0],
               [1.5, 1.5],
-              [3.5, 10.5]
+              [3.5, 10.5],
+              [3.5, 21.5],
+              [34.5, 21.5]
               ]
     return coords
 
