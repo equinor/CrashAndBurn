@@ -71,6 +71,7 @@ def main():
 
     coords = create_waypoints()
     i = 0
+    drone.set_target(target_x, target_y)
 
     rate = rospy.Rate(30)
     while not rospy.is_shutdown():
@@ -86,8 +87,9 @@ def main():
         # Do special action if we are close
         if distance_to_target < 0.5:
 
-            if i < len(coords):
+            if i < len(coords)-1:
                 i = i + 1
+                print("Next index is ", i)
 
             target_x = coords[i][1]
             target_y = coords[i][0]
