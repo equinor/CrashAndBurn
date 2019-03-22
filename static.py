@@ -70,7 +70,7 @@ def main():
     target_y = 0
 
     coords = create_waypoints()
-    i = 0
+    i=0
 
     rate = rospy.Rate(30)
     while not rospy.is_shutdown():
@@ -80,24 +80,19 @@ def main():
         # ---------with your code!-------
         # -------------------------------
         # Find how far we are away from target
+        if i == 0:
+            drone.set_target(0, 0)
         distance_to_target = ((target_x - drone.position.x)**2 +
                              (target_y - drone.position.y)**2)**0.5
 
         # Do special action if we are close
         if distance_to_target < 0.5:
-        #     # Print current distance to goal. Note that we
-        #     # wont reach the goal, since we just move randomly
-        #     distance_to_goal = ((drone.position.x - goal.x)**2 +
-        #                         (drone.position.y - goal.y)**2)**0.5
-        #
-        #     print("Distance to goal is now", distance_to_goal)
-        #
-        #     # Generate some random point and rotation
-        #     target_x = random.randint(-3, 3)
-        #     target_y = random.randint(-3, 3)
 
-            if i < len(coords):
+            if i < len(coords)-1:
                 i = i + 1
+                print("Next index is ", i)
+            else:
+                drone.takeoff(height=0)
 
             target_x = coords[i][1]
             target_y = coords[i][0]
@@ -111,8 +106,16 @@ def main():
 
 def create_waypoints():
     coords = [[0, 0],
-              [1.5, 1.5],
-              [3.5, 10.5]
+              [3.5, 2.5],
+              [3.5, 10.5],
+              [3.5, 22.5],
+              [10.5, 22.5],
+              [20, 22.5],
+              [34.5, 22.5],
+              [34.5, 12],
+              [34.5, 2.5],
+              [19.5, 2.5],
+              [19.5, 10.5]
               ]
     return coords
 
@@ -122,3 +125,4 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         pass
+
