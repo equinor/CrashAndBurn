@@ -70,7 +70,7 @@ def main():
     target_y = 0
 
     coords = create_waypoints()
-    i=0
+    i = 0
 
     rate = rospy.Rate(30)
     while not rospy.is_shutdown():
@@ -116,9 +116,7 @@ def create_waypoints():
               [34.5, 2.5],
               [19.5, 2.5],
               [19.5, 10.5]
-              ]
-    return coords
-
+    ]
 
 if __name__ == '__main__':
     try:
